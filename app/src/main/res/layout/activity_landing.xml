@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/darkGreen"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="My Food Alert"
+        android:fontFamily="cursive"
+        android:textSize="60sp"
+        android:background="@color/trasparent_white"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="@drawable/gradient"
+        app:layout_constraintTop_toBottomOf="@id/title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+    <Button
+        android:id="@+id/what_do_i_have_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        android:background="@drawable/button_background"
+        android:text="What do I Have?"
+        android:fontFamily="serif"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        />
+
+    <Button
+        android:id="@+id/shopping_list_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginTop="16dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        android:background="@drawable/button_background"
+        android:text="Shopping List"
+        android:fontFamily="serif"
+        android:textSize="20sp"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/recipes_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginTop="16dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        android:background="@drawable/button_background"
+        android:text="Expiring Soon"
+        android:fontFamily="serif"
+        android:textSize="20sp"
+        android:textAllCaps="false"/>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

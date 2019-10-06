@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">myFoodAlert</string>
+    <string name="room_temp_shelf_life_string">Room temperature shelf life: %1$s</string>
+    <string name="should_not_be_maintained_in_room_temp">Should not be maintained in room temperature</string>
+    <string name="ref_shelf_life_string">Refrigerated shelf life: %1$s</string>
+    <string name="should_not_be_maintained_in_ref">Should not be refrigerated</string>
+    <string name="frozen_shelf_life_string">Frozen shelf life: %1$s</string>
+    <string name="should_not_be_frozen">Should not be frozen</string>
+</resources>
