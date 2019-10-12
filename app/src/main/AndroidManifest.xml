@@ -33,5 +33,9 @@
             android:screenOrientation="portrait"
             android:resizeableActivity="true"/>
 
+        <activity android:name=".Activities.AddFoodItemActivity"
+            android:screenOrientation="portrait"
+            android:resizeableActivity="true"/>
+
     </application>
 </manifest>

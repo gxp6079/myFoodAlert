@@ -20,5 +20,12 @@ class LandingActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         })
+
+        shopping_list_button.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(applicationContext, ShoppingListActivity::class.java)
+                startActivity(intent)
+            }
+        })
     }
 }
