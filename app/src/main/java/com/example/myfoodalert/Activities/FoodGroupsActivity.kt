@@ -27,8 +27,8 @@ class FoodGroupsActivity: AppCompatActivity() {
         carbs_item.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(applicationContext, FoodGroupPageActivity::class.java)
-                intent.putExtra("FoodGroup", FoodGroup.CARBOHYDRATES)
-                intent.putExtra("example", FoodType("Breads, fresh", FoodGroup.CARBOHYDRATES, "3-5 days"))
+                intent.putExtra("FoodGroup", "Carbohydrates")
+                intent.putExtra("example", FoodType("Breads, fresh", FoodGroup.CARBOHYDRATES.name, "3-5 days"))
                 startActivity(intent)
             }
         })
@@ -38,8 +38,8 @@ class FoodGroupsActivity: AppCompatActivity() {
         proteins_item.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(applicationContext, FoodGroupPageActivity::class.java)
-                intent.putExtra("FoodGroup", FoodGroup.PROTAINS)
-                intent.putExtra("example", FoodType("Breads, fresh", FoodGroup.CARBOHYDRATES, "3-5 days"))
+                intent.putExtra("FoodGroup", "Proteins")
+                intent.putExtra("example", FoodType("Breads, fresh", FoodGroup.CARBOHYDRATES.name, "3-5 days"))
                 startActivity(intent)
             }
         })
@@ -49,8 +49,8 @@ class FoodGroupsActivity: AppCompatActivity() {
         dairy_item.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(applicationContext, FoodGroupPageActivity::class.java)
-                intent.putExtra("FoodGroup", FoodGroup.DAIRY)
-                intent.putExtra("example", FoodType("Cream Cheese", FoodGroup.DAIRY, refrigetatorLife = "2 weeks"))
+                intent.putExtra("FoodGroup", "Milk and dairy")
+                intent.putExtra("example", FoodType("Cream Cheese", FoodGroup.DAIRY.name, refrigetatorLife = "2 weeks"))
                 startActivity(intent)
             }
         })
@@ -60,8 +60,8 @@ class FoodGroupsActivity: AppCompatActivity() {
         fruits_and_veg_item.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(applicationContext, FoodGroupPageActivity::class.java)
-                intent.putExtra("FoodGroup", FoodGroup.FRUITS_AND_VEGETABLES)
-                intent.putExtra("example", FoodType("Grapefruit", FoodGroup.FRUITS_AND_VEGETABLES, "7 days", "2 weeks", "4-6 months"))
+                intent.putExtra("FoodGroup", "Fruits and vegetables")
+                intent.putExtra("example", FoodType("Grapefruit", FoodGroup.FRUITS_AND_VEGETABLES.name, "7 days", "2 weeks", "4-6 months"))
                 startActivity(intent)
             }
         })
@@ -71,8 +71,8 @@ class FoodGroupsActivity: AppCompatActivity() {
         fats_sugars_item.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(applicationContext, FoodGroupPageActivity::class.java)
-                intent.putExtra("FoodGroup", FoodGroup.FATS_AND_SUGARS)
-                intent.putExtra("example", FoodType("Breads, fresh", FoodGroup.CARBOHYDRATES, "3-5 days"))
+                intent.putExtra("FoodGroup", "Fats and sugars")
+                intent.putExtra("example", FoodType("Breads, fresh", FoodGroup.CARBOHYDRATES.name, "3-5 days"))
                 startActivity(intent)
             }
         })

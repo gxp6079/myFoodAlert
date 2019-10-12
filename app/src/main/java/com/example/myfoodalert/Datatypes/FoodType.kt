@@ -4,26 +4,24 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.example.myfoodalert.Activities.FoodGroupsActivity
 
-class FoodType(val name: String, val foodGroup: FoodGroupsActivity.FoodGroup,
-               val roomTemperatureLife: String = "", val refrigetatorLife: String = "", val freezerLife: String = "") : Parcelable {
+data class FoodType(val name: String, val foodGroup: String,
+               val roomTemperatureLife: String = "", val refrigetatorLife: String = "", val freezerLife: String = "") : Parcelable  {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
-            TODO("foodGroup"),
             parcel.readString(),
             parcel.readString(),
-            parcel.readString()) {
+            parcel.readString(),
+            parcel.readString())
+
+    override fun writeToParcel(dest: Parcel?, flags: Int) {
+        dest?.writeString(name)
+        dest?.writeString(foodGroup)
+        dest?.writeString(roomTemperatureLife)
+        dest?.writeString(refrigetatorLife)
+        dest?.writeString(freezerLife)
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
-        parcel.writeString(roomTemperatureLife)
-        parcel.writeString(refrigetatorLife)
-        parcel.writeString(freezerLife)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
+    override fun describeContents() = 0
 
     companion object CREATOR : Parcelable.Creator<FoodType> {
         override fun createFromParcel(parcel: Parcel): FoodType {
@@ -34,4 +32,5 @@ class FoodType(val name: String, val foodGroup: FoodGroupsActivity.FoodGroup,
             return arrayOfNulls(size)
         }
     }
+
 }

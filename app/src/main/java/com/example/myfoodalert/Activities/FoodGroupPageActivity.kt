@@ -27,21 +27,21 @@ class FoodGroupPageActivity: AppCompatActivity() {
             child.roomTemp.text = resources.getString(R.string.should_not_be_maintained_in_room_temp)
         }
         if(!exType.refrigetatorLife.isNullOrEmpty()) {
-            child.roomTemp.text = resources.getString(R.string.ref_shelf_life_string).format(exType.refrigetatorLife)
+            child.refTemp.text = resources.getString(R.string.ref_shelf_life_string).format(exType.refrigetatorLife)
         }
         else {
-            child.roomTemp.text = resources.getString(R.string.should_not_be_maintained_in_ref)
+            child.refTemp.text = resources.getString(R.string.should_not_be_maintained_in_ref)
 
         }
         if(!exType.freezerLife.isNullOrEmpty()) {
-            child.roomTemp.text = resources.getString(R.string.frozen_shelf_life_string).format(exType.freezerLife)
+            child.freezTemp.text = resources.getString(R.string.frozen_shelf_life_string).format(exType.freezerLife)
         }
         else {
-            child.roomTemp.text = resources.getString(R.string.should_not_be_frozen)
+            child.freezTemp.text = resources.getString(R.string.should_not_be_frozen)
         }
 
 
-            food_types_insert_point.addView(child)
+        food_types_insert_point.addView(child)
 
     }
 }
