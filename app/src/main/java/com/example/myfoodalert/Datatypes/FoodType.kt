@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.example.myfoodalert.Activities.FoodGroupsActivity
 
-data class FoodType(val name: String, val foodGroup: String,
+data class FoodType(val name: String, val foodGroup: String = "",
                val roomTemperatureLife: String = "", val refrigetatorLife: String = "", val freezerLife: String = "") : Parcelable  {
     constructor(parcel: Parcel) : this(
             parcel.readString(),

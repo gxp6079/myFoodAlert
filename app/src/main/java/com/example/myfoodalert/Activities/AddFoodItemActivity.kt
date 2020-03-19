@@ -1,9 +1,12 @@
 package com.example.myfoodalert.Activities
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
@@ -19,9 +22,9 @@ import kotlin.collections.ArrayList
 
 class AddFoodItemActivity : AppCompatActivity(), SearchView.OnQueryTextListener{
 
-    lateinit var foodList: ListView
+    lateinit var foodList: RecyclerView
     lateinit var foodSearch: SearchView
-    lateinit var adapter: FoodListAdapter
+    lateinit var foodListAdapter: FoodListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,7 @@ class AddFoodItemActivity : AppCompatActivity(), SearchView.OnQueryTextListener{
 
         foodList = food_list
         foodSearch = food_search
+        val notFoundItem = FoodType("Food not found")
 
         val listOfFoods = ArrayList<FoodType>()
         listOfFoods.add(FoodType("Breads, fresh", FoodGroupsActivity.FoodGroup.CARBOHYDRATES.name, "3-5 days"))
@@ -38,11 +42,15 @@ class AddFoodItemActivity : AppCompatActivity(), SearchView.OnQueryTextListener{
         listOfFoods.add(FoodType("Eggs", FoodGroupsActivity.FoodGroup.CARBOHYDRATES.name, "3-5 days"))
         listOfFoods.add(FoodType("Fondant", FoodGroupsActivity.FoodGroup.CARBOHYDRATES.name, "3-5 days"))
 
+        listOfFoods.add(notFoundItem)
 
-        adapter = FoodListAdapter(listOfFoods, applicationContext)
+        foodListAdapter = FoodListAdapter(listOfFoods, applicationContext, notFoundItem)
 
         foodSearch.setOnQueryTextListener(this)
-        foodList.adapter = adapter
+        foodList.apply {
+            layoutManager = LinearLayoutManager(this@AddFoodItemActivity)
+            adapter = foodListAdapter
+        }
     }
 
 
@@ -51,38 +59,47 @@ class AddFoodItemActivity : AppCompatActivity(), SearchView.OnQueryTextListener{
     }
 
     override fun onQueryTextChange(p0: String?): Boolean {
-        adapter.filter(p0 ?: "")
+        foodListAdapter.filter(p0 ?: "")
         return false
     }
 
 }
 
-class FoodListAdapter(val items: ArrayList<FoodType>, val context: Context): BaseAdapter() {
+class FoodListAdapter(val items: ArrayList<FoodType>, val context: Context, val notFoundItem: FoodType): RecyclerView.Adapter<FoodItemViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): FoodItemViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_food_item, parent, false)
+        return FoodItemViewHolder(view)
+    }
+
+    override fun getItemCount(): Int {
+        return itemsDisplaying.size
+    }
+
+    override fun onBindViewHolder(holder: FoodItemViewHolder, index: Int) {
+        val item = itemsDisplaying[index]
+        holder.name.text = item.name
+        if(item.foodGroup.isNotBlank()) {
+            holder.roomLife.text = item.roomTemperatureLife
+            holder.refrigeratorLife.text = item.refrigetatorLife
+            holder.freezerLife.text = item.freezerLife
+            holder.name.background = ResourcesCompat.getDrawable(context.resources, R.drawable.image_border, null)
+        }
+        else{
+            holder.roomLife.visibility = View.GONE
+            holder.refrigeratorLife.visibility = View.GONE
+            holder.freezerLife.visibility = View.GONE
+            holder.image.visibility = View.GONE
+            holder.name.background = ResourcesCompat.getDrawable(context.resources, R.drawable.button_background, null)
+        }
+    }
+
     val itemsDisplaying = ArrayList<FoodType>()
 
     init {
         itemsDisplaying.addAll(items)
+        notifyDataSetChanged()
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val holder: FoodItemViewHolder
-        val view: View
-        if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.item_food_item, null)
-            holder = FoodItemViewHolder(view)
-            view.setTag(holder)
-        }
-        else {
-            view = convertView
-            holder = convertView.getTag() as FoodItemViewHolder
-        }
-        val item = itemsDisplaying[position]
-        holder.name.text = item.name
-        holder.roomLife.text = item.roomTemperatureLife
-        holder.refrigeratorLife.text = item.refrigetatorLife
-        holder.freezerLife.text = item.freezerLife
-        return view
-    }
 
     // Filter Class
     fun filter(charText : String) {
@@ -96,24 +113,13 @@ class FoodListAdapter(val items: ArrayList<FoodType>, val context: Context): Bas
                 }
             }
         }
+        itemsDisplaying.add(notFoundItem)
         notifyDataSetChanged()
     }
 
-
-    override fun getItem(position: Int): FoodType {
-        return itemsDisplaying[position]
-    }
-
-    override fun getItemId(position: Int): Long {
-       return position.toLong()
-    }
-
-    override fun getCount(): Int {
-        return itemsDisplaying.size
-    }
 }
 
-class FoodItemViewHolder(view: View){
+class FoodItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     val image: ImageView
     val name: TextView
     val roomLife: TextView
@@ -121,11 +127,11 @@ class FoodItemViewHolder(view: View){
     val freezerLife: TextView
 
     init {
-        image = view.findViewById(R.id.food_type_image)
-        name = view.findViewById(R.id.food_name)
-        roomLife = view.findViewById(R.id.room_shelf_life)
-        refrigeratorLife = view.findViewById(R.id.refrigerator_shelf_life)
-        freezerLife = view.findViewById(R.id.frozen_shelf_life)
+        image = itemView.findViewById(R.id.food_type_image)
+        name = itemView.findViewById(R.id.food_name)
+        roomLife = itemView.findViewById(R.id.room_shelf_life)
+        refrigeratorLife = itemView.findViewById(R.id.refrigerator_shelf_life)
+        freezerLife = itemView.findViewById(R.id.frozen_shelf_life)
     }
 }
 
