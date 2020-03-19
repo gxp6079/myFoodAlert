@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
+import android.support.v4.app.Fragment
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -20,18 +21,19 @@ import org.w3c.dom.Text
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AddFoodItemActivity : AppCompatActivity(), SearchView.OnQueryTextListener{
+class AddFoodItemFragment : Fragment(), SearchView.OnQueryTextListener{
 
     lateinit var foodList: RecyclerView
     lateinit var foodSearch: SearchView
+    lateinit var doneButton: Button
     lateinit var foodListAdapter: FoodListAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_to_shopping_list)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = layoutInflater.inflate(R.layout.activity_add_to_shopping_list, container, false)
 
-        foodList = food_list
-        foodSearch = food_search
+        foodList = view.findViewById(R.id.food_list)
+        foodSearch = view.findViewById(R.id.food_search)
+        doneButton = view.findViewById(R.id.done_button)
         val notFoundItem = FoodType("Food not found")
 
         val listOfFoods = ArrayList<FoodType>()
@@ -44,13 +46,21 @@ class AddFoodItemActivity : AppCompatActivity(), SearchView.OnQueryTextListener{
 
         listOfFoods.add(notFoundItem)
 
-        foodListAdapter = FoodListAdapter(listOfFoods, applicationContext, notFoundItem)
+        activity?.applicationContext?.let {
+            foodListAdapter = FoodListAdapter(listOfFoods, it, notFoundItem)
 
-        foodSearch.setOnQueryTextListener(this)
-        foodList.apply {
-            layoutManager = LinearLayoutManager(this@AddFoodItemActivity)
-            adapter = foodListAdapter
+            foodSearch.setOnQueryTextListener(this)
+            foodList.apply {
+                layoutManager = LinearLayoutManager(it)
+                adapter = foodListAdapter
+            }
         }
+
+       doneButton.setOnClickListener {
+            (activity as ShoppingListActivity).goToShoppingList(foodListAdapter.selectedItems)
+        }
+
+        return view
     }
 
 
@@ -66,6 +76,8 @@ class AddFoodItemActivity : AppCompatActivity(), SearchView.OnQueryTextListener{
 }
 
 class FoodListAdapter(val items: ArrayList<FoodType>, val context: Context, val notFoundItem: FoodType): RecyclerView.Adapter<FoodItemViewHolder>() {
+    val selectedItems = ArrayList<FoodType>()
+
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): FoodItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_food_item, parent, false)
         return FoodItemViewHolder(view)

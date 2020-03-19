@@ -10,6 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:fontFamily="serif"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintTop_toTopOf="parent"
         android:hint="Food name"/>
 
@@ -20,6 +23,9 @@
         android:layout_margin="16dp"
         app:layout_constraintTop_toBottomOf="@id/item_name"
         app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="serif"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         android:hint="MM" />
 
     <TextView
@@ -28,6 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="@id/month_entry"
         app:layout_constraintBottom_toBottomOf="@id/month_entry"
         app:layout_constraintStart_toEndOf="@id/month_entry"
@@ -40,8 +48,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="serif"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/item_name"
         app:layout_constraintStart_toEndOf="@id/month_division"
+
         android:hint="DD" />
 
     <TextView
@@ -51,6 +63,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="@id/month_entry"
         app:layout_constraintBottom_toBottomOf="@id/month_entry"
         app:layout_constraintStart_toEndOf="@id/day_entry"
@@ -63,6 +77,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="serif"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/item_name"
         app:layout_constraintStart_toEndOf="@id/day_didsion"
         android:hint="YYYY" />
@@ -79,6 +96,7 @@
         android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
         android:text="Submit"
         android:textAllCaps="false"
         android:layout_margin="16dp"

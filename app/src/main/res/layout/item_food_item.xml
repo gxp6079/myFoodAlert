@@ -15,7 +15,7 @@
         android:src="@drawable/carb_image"
         android:background="@drawable/image_border"
         app:layout_constraintTop_toBottomOf="@id/food_name"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/frozen_shelf_life"
         app:layout_constraintStart_toStartOf="parent"
         />
 
@@ -77,5 +77,20 @@
         app:layout_constraintStart_toEndOf="@id/food_type_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/refrigerator_shelf_life"/>
+
+    <Button
+        android:id="@+id/remove_button"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/button_background"
+        android:text="Remove"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/frozen_shelf_life"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        />
 
 </android.support.constraint.ConstraintLayout>
