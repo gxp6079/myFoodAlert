@@ -32,4 +32,8 @@ class ShoppingListActivity: AppCompatActivity(){
                 .replace(R.id.container, AddFoodItemFragment())
                 .commit()
     }
+
+    fun showNewFoodDialog(){
+        NewFoodTypeDialog().show(supportFragmentManager, "dialog")
+    }
 }

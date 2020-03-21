@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:paddingBottom="16dp"
     android:background="@color/white"
+    android:id="@+id/food_type_container"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView

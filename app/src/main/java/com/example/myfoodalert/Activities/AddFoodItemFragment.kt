@@ -47,7 +47,7 @@ class AddFoodItemFragment : Fragment(), SearchView.OnQueryTextListener{
         listOfFoods.add(notFoundItem)
 
         activity?.applicationContext?.let {
-            foodListAdapter = FoodListAdapter(listOfFoods, it, notFoundItem)
+            foodListAdapter = FoodListAdapter(listOfFoods, it, notFoundItem, activity as ShoppingListActivity)
 
             foodSearch.setOnQueryTextListener(this)
             foodList.apply {
@@ -75,7 +75,7 @@ class AddFoodItemFragment : Fragment(), SearchView.OnQueryTextListener{
 
 }
 
-class FoodListAdapter(val items: ArrayList<FoodType>, val context: Context, val notFoundItem: FoodType): RecyclerView.Adapter<FoodItemViewHolder>() {
+class FoodListAdapter(val items: ArrayList<FoodType>, val context: Context, val notFoundItem: FoodType, val activity: ShoppingListActivity): RecyclerView.Adapter<FoodItemViewHolder>() {
     val selectedItems = ArrayList<FoodType>()
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): FoodItemViewHolder {
@@ -90,6 +90,21 @@ class FoodListAdapter(val items: ArrayList<FoodType>, val context: Context, val 
     override fun onBindViewHolder(holder: FoodItemViewHolder, index: Int) {
         val item = itemsDisplaying[index]
         holder.name.text = item.name
+
+        holder.container.setOnClickListener {
+            if(selectedItems.contains(item) && item.foodGroup.isNotBlank()){
+                selectedItems.remove(item)
+                holder.container.alpha = 1.0f
+            }
+            else if(item.foodGroup.isNotBlank()){
+                selectedItems.add(item)
+                holder.container.alpha = 0.5f
+            }
+            else{
+                activity.showNewFoodDialog()
+            }
+        }
+
         if(item.foodGroup.isNotBlank()) {
             holder.roomLife.text = item.roomTemperatureLife
             holder.refrigeratorLife.text = item.refrigetatorLife
@@ -116,16 +131,20 @@ class FoodListAdapter(val items: ArrayList<FoodType>, val context: Context, val 
     // Filter Class
     fun filter(charText : String) {
         itemsDisplaying.clear()
+        notifyDataSetChanged()
+
         if (charText.length == 0) {
-            itemsDisplaying.addAll(items)
+            for (foodType in items) {
+                itemsDisplaying.add(foodType)
+            }
         } else {
             for (foodType in items) {
                 if (foodType.name.toLowerCase().contains(charText.toLowerCase())) {
                     itemsDisplaying.add(foodType)
                 }
             }
+            itemsDisplaying.add(notFoundItem)
         }
-        itemsDisplaying.add(notFoundItem)
         notifyDataSetChanged()
     }
 
@@ -137,6 +156,7 @@ class FoodItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     val roomLife: TextView
     val refrigeratorLife: TextView
     val freezerLife: TextView
+    val container: ConstraintLayout
 
     init {
         image = itemView.findViewById(R.id.food_type_image)
@@ -144,6 +164,7 @@ class FoodItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         roomLife = itemView.findViewById(R.id.room_shelf_life)
         refrigeratorLife = itemView.findViewById(R.id.refrigerator_shelf_life)
         freezerLife = itemView.findViewById(R.id.frozen_shelf_life)
+        container = itemView.findViewById(R.id.food_type_container)
     }
 }
 
