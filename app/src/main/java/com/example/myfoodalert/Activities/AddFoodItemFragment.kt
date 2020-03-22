@@ -1,12 +1,10 @@
 package com.example.myfoodalert.Activities
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
 import android.support.v4.content.res.ResourcesCompat
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
@@ -16,9 +14,6 @@ import android.view.ViewGroup
 import android.widget.*
 import com.example.myfoodalert.Datatypes.FoodType
 import com.example.myfoodalert.R
-import kotlinx.android.synthetic.main.activity_add_to_shopping_list.*
-import org.w3c.dom.Text
-import java.util.*
 import kotlin.collections.ArrayList
 
 class AddFoodItemFragment : Fragment(), SearchView.OnQueryTextListener{
@@ -29,7 +24,7 @@ class AddFoodItemFragment : Fragment(), SearchView.OnQueryTextListener{
     lateinit var foodListAdapter: FoodListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = layoutInflater.inflate(R.layout.activity_add_to_shopping_list, container, false)
+        val view = layoutInflater.inflate(R.layout.fragment_add_to_shopping_list, container, false)
 
         foodList = view.findViewById(R.id.food_list)
         foodSearch = view.findViewById(R.id.food_search)

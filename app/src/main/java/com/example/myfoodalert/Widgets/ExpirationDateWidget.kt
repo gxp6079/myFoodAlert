@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.EditText
 import com.example.myfoodalert.R
-import kotlinx.android.synthetic.main.expiration_date_entry.view.*
+import kotlinx.android.synthetic.main.item_expiration_date_entry.view.*
 
 class ExpirationDateWidget  @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0): ConstraintLayout(context, attrs, defStyleAttr) {
     var month: EditText
@@ -14,7 +14,7 @@ class ExpirationDateWidget  @JvmOverloads constructor(context: Context, attrs: A
     var year: EditText
 
     init {
-        View.inflate(context, R.layout.expiration_date_entry, this)
+        View.inflate(context, R.layout.item_expiration_date_entry, this)
         month = month_entry
         day = day_entry
         year = year_entry
